@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.CommentDAO">
+    <resultMap type="com.entity.Comment" id="BaseResultMap">
+      <id column="id" property="id" jdbcType="INTEGER"/>
+      <result column="memberid" property="memberid" jdbcType="VARCHAR"/>
+      <result column="productid" property="productid" jdbcType="VARCHAR"/>
+      <result column="hfcontent" property="hfcontent" jdbcType="VARCHAR"/>
+      <result column="content" property="content" jdbcType="VARCHAR"/>
+      <result column="savetime" property="savetime" jdbcType="VARCHAR"/>
+       <result column="score" property="score" jdbcType="INTEGER"/>
+      
+    </resultMap>
+    
+    <select id="selectAll" parameterType="HashMap" resultMap="BaseResultMap">
+      select * from comment where 1=1
+      <if test="productid!=null and productid!=''">
+        and productid=#{productid}
+      </if>
+      <if test="memberid!=null and memberid!=''">
+        and memberid=#{memberid}
+      </if>
+      order by id desc
+    </select>
+    
+    <insert id="add" parameterType="Comment">
+      insert into comment values(null,#{memberid},#{productid},#{hfcontent},#{content},now(),#{score});
+    </insert>
+    
+    
+    <delete id="delete" parameterType="Int">
+      delete from comment where id=#{id}
+    </delete>
+    
+    <select id="findById" parameterType="Int" resultType="Comment">
+      select * from comment where id=#{id}
+    </select>
+    
+    <update id="update" parameterType="Comment">
+      update comment set hfcontent=#{hfcontent} where id=#{id}
+    </update>
+    
+    
+	
+</mapper>
+

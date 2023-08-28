@@ -1,0 +1,12 @@
+
+
+
+.idea
+/.idea
+*.iml
+out
+gen
+/target/
+/.gitignore
+/patrol-admin/target/
+/.idea/
